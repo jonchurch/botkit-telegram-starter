@@ -21,7 +21,7 @@ var env = require('node-env-file');
 env(__dirname + '/.env');
 
 
-var Botkit = require('botkit');
+var Botkit = require('../../Forks/botkit')//require('botkit');
 var debug = require('debug')('botkit:main');
 
 // Create the Botkit controller, which controls all instances of the bot.
