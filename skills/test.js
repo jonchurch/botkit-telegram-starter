@@ -16,9 +16,20 @@ module.exports = function(controller) {
 		  convo.next()
 	  })
 })
-	controller.hears('(.*)', 'direct_mention,direct_message,group_message,channel_message', (bot, message) => {
+	controller.hears('(.*)', 'message_received,direct_mention,direct_message,group_message,channel_message', (bot, message) => {
+		console.log('MESSAGE HEARD:\n', message.message)
 		bot.reply(message, message.type)
 		bot.reply(message, message.text)
+})
+
+controller.on('photo', (bot, message) => {
+	console.log('PHOTO EVENT:\n', message)
+	bot.reply(message, 'Lovely image')
+})
+
+controller.on('video', (bot, message) => {
+	console.log('Video EVENT:\n', message)
+	bot.reply(message, 'Lovely video')
 })
 
 
