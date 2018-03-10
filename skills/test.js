@@ -16,6 +16,28 @@ module.exports = function(controller) {
 		  convo.next()
 	  })
 })
+	controller.on('interactive_message_callback', (bot, payload) => {
+		console.log('INT MESSAGE PAYLOAD:\n', payload)
+		bot.reply(payload, 'You selected: ' + payload.text)
+	})
+
+	controller.hears('int', 'direct_message,group_message,direct_mention', (bot, message) => {
+		bot.reply(message, {
+			text: 'This is an inline keyboard',
+			reply_markup: {
+				inline_keyboard: [[
+					{
+						text: 'Yes',
+						callback_data: 'yes'
+					},
+					{
+						text: 'No',
+						callback_data: 'no'
+					},
+				]]
+			}
+		})
+	})
 	controller.hears('(.*)', 'message_received,direct_mention,direct_message,group_message,channel_message', (bot, message) => {
 		console.log('MESSAGE HEARD:\n', message.message)
 		bot.reply(message, message.type)
