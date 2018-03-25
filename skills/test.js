@@ -3,6 +3,13 @@ module.exports = function(controller) {
   
 	controller.on('interactive_message_callback', (bot, payload) => {
 		console.log('INT MESSAGE PAYLOAD:\n', payload)
+		bot.answerCallbackQuery(payload, {text: null, show_alert: false}, (err, res) => {
+			if (err) {
+				console.log('API ERROR:\n', err)
+			} else {
+				console.log("API RES:\n", res)
+			}
+		})
 		bot.reply(payload, 'You selected: ' + payload.text)
 	})
 
@@ -32,8 +39,7 @@ module.exports = function(controller) {
 	controller.on('user_leave,bot_leave', (bot, payload) => {
 		console.log('=====bot/user leave:\n',{payload})
 	})
-  // controller.hears('(.*)', 'ambient', (bot, message) => {
-  // // console.log('HEARD YOU\n',message)
+  // controller.hears('question me', 'ambient', (bot, message) => {
 	  // bot.reply(message, 'I LIVE!')
 	  // bot.startConversation(message, (err, convo) => {
 		  // convo.ask('Can we eat?', (res, convo) => {
