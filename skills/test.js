@@ -2,8 +2,8 @@ module.exports = function(controller) {
   
   
 	controller.on('interactive_message_callback', (bot, payload) => {
-		console.log('INT MESSAGE PAYLOAD:\n', payload)
-		bot.answerCallbackQuery(payload, {text: null, show_alert: false}, (err, res) => {
+		// console.log('INT MESSAGE PAYLOAD:\n', payload)
+		bot.answerCallbackQuery(payload, {text: null, show_alert: false, url: "t.me/kuaytiewbot?start=pizza"}, (err, res) => {
 			if (err) {
 				console.log('API ERROR:\n', err)
 			} else {
