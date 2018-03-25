@@ -26,7 +26,7 @@ var debug = require('debug')('botkit:main');
 
 // Create the Botkit controller, which controls all instances of the bot.
 var controller = Botkit.telegrambot({
-    debug: true,
+    // debug: true,
     webhook_url: process.env.webhook_url,
     // verify_token: process.env.verify_token,
     access_token: process.env.access_token,

@@ -24,6 +24,14 @@ module.exports = function(controller) {
 			}
 		})
 	})
+
+	controller.on('user_join,bot_join', (bot, payload) => {
+		console.log('=====bot/user join:\n',{payload})
+	})
+
+	controller.on('user_leave,bot_leave', (bot, payload) => {
+		console.log('=====bot/user leave:\n',{payload})
+	})
   // controller.hears('(.*)', 'ambient', (bot, message) => {
   // // console.log('HEARD YOU\n',message)
 	  // bot.reply(message, 'I LIVE!')
