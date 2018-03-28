@@ -23,6 +23,17 @@ env(__dirname + '/.env');
 
 var Botkit = require('../../Forks/botkit')//require('botkit');
 var debug = require('debug')('botkit:main');
+var rp = require('request-promise')
+
+rp({
+	method: 'GET',
+	json: true,
+	headers: {
+		'content-type': 'application/json',
+	},
+	uri: 'https://api.telegram.org/bot' + process.env.access_token + '/getMe'
+})
+.then(body => {
 
 // Create the Botkit controller, which controls all instances of the bot.
 var controller = Botkit.telegrambot({
@@ -32,6 +43,7 @@ var controller = Botkit.telegrambot({
     access_token: process.env.access_token,
     studio_token: process.env.studio_token,
     studio_command_uri: process.env.studio_command_uri,
+	identity: body.result
 });
 
 // Set up an Express-powered webserver to expose oauth and webhook endpoints
@@ -89,4 +101,9 @@ function usage_tip() {
     console.log('Get Facebook token here: https://developers.facebook.com/docs/messenger-platform/implementation')
     console.log('Get a Botkit Studio token here: https://studio.botkit.ai/')
     console.log('~~~~~~~~~~');
+
 }
+})
+.catch(err => {
+	console.log('Something went wrong with bots ID: ', err)
+})
